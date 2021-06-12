@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "env-cmd -f .env nodemon src/index.js",
+    "lint": "eslint . --ext .js --quiet",
+    "lint-fix": "eslint . --ext .js --fix"
+  },
+  "author": "Lukas Steiner",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "chalk": "^4.1.1",
+    "cors": "^2.8.5",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "helmet": "^4.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4"
+  }
+}
