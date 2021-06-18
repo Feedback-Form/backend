@@ -4,7 +4,7 @@ const chalk = require("chalk");
 const OpenAI = require("./modules/openai");
 const app = require("../app");
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
-const sendEmail = require("./modules/email/sendEmail");
+const {sendEmail} = require("./modules/email/sendEmail");
 
 appRouter.post("/generate/feedback", async (req, res) => {
 
@@ -64,7 +64,7 @@ appRouter.post("/generate/feedback", async (req, res) => {
 				feedbackSuggestion: output
 			},
 		});
-	} catch {
+	} catch (err) {
 		res.status(400).send({ error: { message: err.message } });
 	}
 });
@@ -94,32 +94,32 @@ appRouter.post("/generate/feedback", async (req, res) => {
 */
 appRouter.post("/send/feedback", async (req, res) => {
 
-	//const { feedbackArray, candidateInformation} = req.body;
+	 const { feedbackArray, candidateInformation} = req.body;
 
-	const feedbackArray = [
-		{
-			question: 'How was your experience with swisspuls?',
-			userSentiment: 'happy',
-			answer: 'AI generated text.'
-		},
-		{
-			question: 'How was your experience with swisspuls?-2',
-			userSentiment: 'happy',
-			answer: 'AI generated text.'
-		},
-		{
-			question: 'How was your experience with swisspuls?-3',
-			userSentiment: 'happy',
-			answer: 'AI generated text.'
-		}
-	];
+	// const feedbackArray = [
+	// 	{
+	// 		question: 'How was your experience with swisspuls?',
+	// 		userSentiment: 'happy',
+	// 		answer: 'AI generated text.'
+	// 	},
+	// 	{
+	// 		question: 'How was your experience with swisspuls?-2',
+	// 		userSentiment: 'happy',
+	// 		answer: 'AI generated text.'
+	// 	},
+	// 	{
+	// 		question: 'How was your experience with swisspuls?-3',
+	// 		userSentiment: 'happy',
+	// 		answer: 'AI generated text.'
+	// 	}
+	// ];
 
-	const candidateInformation = {
-		name: 'Rik',
-		jobTitle: 'Founder',
-		currentCompany: 'Hopr',
-		linkedInProfile: 'linkedin.com/profile/riky-boy'
-	}
+	// const candidateInformation = {
+	// 	name: 'Rik',
+	// 	jobTitle: 'Founder',
+	// 	currentCompany: 'Hopr',
+	// 	linkedInProfile: 'linkedin.com/profile/riky-boy'
+	// }
 
 	try {
 
@@ -132,7 +132,7 @@ appRouter.post("/send/feedback", async (req, res) => {
 		})
 
 
-	} catch {
+	} catch (err) {
 		res.status(400).send({ error: { message: err.message } });
 	}
 })
