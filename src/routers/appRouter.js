@@ -2,7 +2,9 @@ const express = require("express");
 const appRouter = new express.Router();
 const chalk = require("chalk");
 const OpenAI = require("./modules/openai");
+const app = require("../app");
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
+const sendEmail = require("./modules/email/sendEmail");
 
 appRouter.post("/generate/feedback", async (req, res) => {
 
@@ -66,5 +68,73 @@ appRouter.post("/generate/feedback", async (req, res) => {
 		res.status(400).send({ error: { message: err.message } });
 	}
 });
+
+
+/* questionAnswers {OBJECT}
+   
+
+{
+        question: string,
+        userSentiment: string,
+        answer: string
+    }
+
+*/
+
+/* candidateInformation {OBJECT}
+    
+{
+    name: string,
+    jobTitle: string,
+    currentCompany: string,
+    linkedInPorfile: string
+}
+
+
+*/
+appRouter.post("/send/feedback", async (req, res) => {
+
+	//const { feedbackArray, candidateInformation} = req.body;
+
+	const feedbackArray = [
+		{
+			question: 'How was your experience with swisspuls?',
+			userSentiment: 'happy',
+			answer: 'AI generated text.'
+		},
+		{
+			question: 'How was your experience with swisspuls?-2',
+			userSentiment: 'happy',
+			answer: 'AI generated text.'
+		},
+		{
+			question: 'How was your experience with swisspuls?-3',
+			userSentiment: 'happy',
+			answer: 'AI generated text.'
+		}
+	];
+
+	const candidateInformation = {
+		name: 'Rik',
+		jobTitle: 'Founder',
+		currentCompany: 'Hopr',
+		linkedInProfile: 'linkedin.com/profile/riky-boy'
+	}
+
+	try {
+
+		await sendEmail(feedbackArray,candidateInformation);
+
+		res.status(200).send({
+			payload: {
+				message: 'successfully submitted feedback!'
+			}
+		})
+
+
+	} catch {
+		res.status(400).send({ error: { message: err.message } });
+	}
+})
 
 module.exports = appRouter;
