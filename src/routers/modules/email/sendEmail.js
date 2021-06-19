@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 
 
 const sendEmail = async (feedbackArray, candidateInformation) => {
-    const {name, jobTitle, currentCompany, linkedInProfile} = candidateInformation;
+    const {name, jobTitle, currentCompany, linkedIn} = candidateInformation;
 
     try {
         const mailOptions = {
