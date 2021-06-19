@@ -46,7 +46,7 @@ const sendEmail = async (feedbackArray, candidateInformation) => {
                 Name:<span style="font-weight:bold;">${name}</span><br>
                 Job Title:<span style="font-weight:bold;">${jobTitle}</span><br>
                 Current company:<span style="font-weight:bold;">${currentCompany}</span><br>
-                LinkedIn:<span style="font-weight:bold;">${linkedInProfile}</span><br>
+                LinkedIn:<span style="font-weight:bold;">${linkedIn}</span><br>
                 </div>
 
 
