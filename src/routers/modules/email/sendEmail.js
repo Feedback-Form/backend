@@ -51,11 +51,11 @@ const sendEmail = async (feedbackArray, candidateInformation) => {
 
 
                 ${feedbackArray.map((feedbackObject, index) => {
-                        const {question, userSentiment, answer} = feedbackObject;
+                        const {question, selectedRating, answer} = feedbackObject;
                    return  `
                     <div style="padding-bottom: 5px;">
                     <h4 style="padding-bottom: 5px;">${index + 1}. ${question}</h4><br>
-                    sentiment:<span style="font-weight:bold;">${userSentiment}</span><br>
+                    selected rating:<span style="font-weight:bold;">${selectedRating}</span><br>
                     answer:<span style="font-weight:bold;">${answer}</span>
                     </div>
                     `
