@@ -24,7 +24,7 @@ const sendEmail = async (feedbackArray, candidateInformation) => {
     try {
         const mailOptions = {
             from: `${process.env.EMAIL}`,
-            to: 'lukas.ste01@gmail.com',
+            to: 'yeng.chow@swisspuls.ch',
             cc: 'lukas.ste01@gmail.com, fabio_senti@hotmail.com',
             subject: `New feedback received! 🚀`,
             text: `
