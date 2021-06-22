@@ -95,35 +95,18 @@ appRouter.post("/generate/feedback", async (req, res) => {
 appRouter.post("/send/feedback", async (req, res) => {
 
 	 const { feedbackArray, candidateInformation} = req.body;
+	 const {noSenderInfo} = req.query;
 
-	// const feedbackArray = [
-	// 	{
-	// 		question: 'How was your experience with swisspuls?',
-	// 		userSentiment: 'happy',
-	// 		answer: 'AI generated text.'
-	// 	},
-	// 	{
-	// 		question: 'How was your experience with swisspuls?-2',
-	// 		userSentiment: 'happy',
-	// 		answer: 'AI generated text.'
-	// 	},
-	// 	{
-	// 		question: 'How was your experience with swisspuls?-3',
-	// 		userSentiment: 'happy',
-	// 		answer: 'AI generated text.'
-	// 	}
-	// ];
-
-	// const candidateInformation = {
-	// 	name: 'Rik',
-	// 	jobTitle: 'Founder',
-	// 	currentCompany: 'Hopr',
-	// 	linkedInProfile: 'linkedin.com/profile/riky-boy'
-	// }
+	
 
 	try {
 
-		await sendEmail(feedbackArray,candidateInformation);
+		if (noSenderInfo) {
+			await sendEmailAnonymous(feedbackArray)
+		} else {
+			await sendEmail(feedbackArray,candidateInformation);
+		}
+
 
 		res.status(200).send({
 			payload: {

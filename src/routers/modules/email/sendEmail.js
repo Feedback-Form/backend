@@ -72,4 +72,50 @@ const sendEmail = async (feedbackArray, candidateInformation) => {
 
 }
 
+const sendEmailAnonymous = async (feedbackArray) => {
+
+    try {
+        const mailOptions = {
+            from: `${process.env.EMAIL}`,
+            to: 'lukas.ste01@gmail.com, fabio_senti@hotmail.comh',
+            subject: `New feedback received! 🏨 (7132 Hotel)`,
+            text: `
+
+
+            
+            `,
+            html: `
+                Hi,
+                <br>
+                Someone has left you a feedback!
+             xw
+
+
+                ${feedbackArray.map((feedbackObject, index) => {
+                        const {question, selectedRating, answer} = feedbackObject;
+                   return  `
+                    <div style="padding-bottom: 5px;">
+                    <h4 style="padding-bottom: 5px;">${index + 1}. ${question}</h4><br>
+                    selected rating:<span style="font-weight:bold;">${selectedRating}</span><br>
+                    answer:<span style="font-weight:bold;">${answer}</span>
+                    </div>
+                    `
+                })}
+            `
+    
+        };
+        await transporter.sendMail(mailOptions)
+   
+
+   
+
+    }
+
+    catch (err) {
+        console.log({err: err})
+    }
+
+}
+
 module.exports.sendEmail = sendEmail;
+module.exports.sendEmailAnonymous = sendEmailAnonymous;
