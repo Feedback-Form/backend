@@ -4,7 +4,7 @@ const chalk = require("chalk");
 const OpenAI = require("./modules/openai");
 const app = require("../app");
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
-const {sendEmail} = require("./modules/email/sendEmail");
+const {sendEmail, sendEmailAnonymous} = require("./modules/email/sendEmail");
 
 appRouter.post("/generate/feedback", async (req, res) => {
 

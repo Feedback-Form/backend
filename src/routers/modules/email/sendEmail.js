@@ -77,7 +77,7 @@ const sendEmailAnonymous = async (feedbackArray) => {
     try {
         const mailOptions = {
             from: `${process.env.EMAIL}`,
-            to: 'lukas.ste01@gmail.com, fabio_senti@hotmail.comh',
+            to: 'lukas.ste01@gmail.com, fabio_senti@hotmail.com',
             subject: `New feedback received! 🏨 (7132 Hotel)`,
             text: `
 
@@ -88,7 +88,7 @@ const sendEmailAnonymous = async (feedbackArray) => {
                 Hi,
                 <br>
                 Someone has left you a feedback!
-             xw
+             
 
 
                 ${feedbackArray.map((feedbackObject, index) => {
