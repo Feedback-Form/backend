@@ -5,6 +5,7 @@ const helmet = require('helmet');
 
 // routers
 const appRouter = require('./routers/appRouter');
+const userRouter = require('./routers/userRouter');
 
 const app = express();
 app.use(helmet());
@@ -21,5 +22,6 @@ app.use(session({
 
 app.use(express.json());
 app.use(appRouter);
+app.use(userRouter);
 
 module.exports = app;
