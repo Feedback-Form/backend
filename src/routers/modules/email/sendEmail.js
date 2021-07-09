@@ -67,7 +67,7 @@ const sendEmail = async (feedbackArray, candidateInformation) => {
     }
 
     catch (err) {
-        console.log({err: err})
+        return err;
     }
 
 }
@@ -112,7 +112,7 @@ const sendEmailAnonymous = async (feedbackArray) => {
     }
 
     catch (err) {
-        console.log({err: err})
+        return err;
     }
 
 }

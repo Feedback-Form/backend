@@ -23,6 +23,13 @@ const formSchema = new mongoose.Schema(
 				},
 			},
 		],
+		savedTags: [
+			{
+				type: String,
+				required: true,
+				trim: true,
+			},
+		],
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
