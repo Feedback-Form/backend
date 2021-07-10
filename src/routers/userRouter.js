@@ -13,26 +13,16 @@ const User = require("../models/userDocument");
 const rateLimiterUsingThirdParty = require("../middlewares/rateLimiter");
 const auth = require("../middlewares/auth");
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-// helper functions
-// const {
-//   usePwHashToToken,
-//   getUserVerificationURL,
-// } = require('./modules/usePwHashTokenHelper');
-
-s;
-
 // create a user
 userRouter.post("/v1/user/create", async (req, res) => {
-	const user = new User({
-		...req.body,
-		userIsVerified: true,
-	});
 	// const { name, email } = req.body;
 
 	try {
-		await user.save();
+		const user = new User({
+			...req.body,
+			userIsVerified: true,
+		});
+		const savedUser = await user.save();
 
 		// // initiate verification flow
 		// const verificationToken = usePwHashToToken(user, '24h');
@@ -59,6 +49,7 @@ userRouter.post("/v1/user/create", async (req, res) => {
 		res.status(201).send({
 			payload: {
 				message: `You've successfully registered.`,
+				savedUser,
 			},
 		});
 	} catch (err) {

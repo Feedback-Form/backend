@@ -1,23 +1,21 @@
 const outputTransformer = (outputList) => {
 	// match until linebreak
-	const outputTextTransformedTwo = outputList.match(/.*\s*/g);
+	const a = outputList.match(/.*\s*/g);
 	// remove all linebreaks
-	const outputTextTransformedThree = outputTextTransformedTwo.map((kr) =>
-		kr.replace(/(?:\r\n|\r|\n)/g, "")
-	);
+	const b = a.map((i) => i.replace(/(?:\r\n|\r|\n)/g, ""));
 
 	// remove all consecutive whitespaces in strings
-	const outputTextTransformedFour = outputTextTransformedThree.map((kr) =>
-		kr.replace(/\s+\s+/g, " ")
-	);
+	const c = b.map((i) => i.replace(/\s+\s+/g, " "));
 
-	const outputTextFinal = outputTextTransformedFour;
-	if (
-		outputTextTransformedFour[outputTextTransformedFour.length - 1] === ""
-	) {
-		outputTextFinal.pop();
+	const d = c;
+	if (c[c.length - 1] === "") {
+		d.pop();
 	}
-	return outputTextFinal;
+	const e = d.map((i) => {
+		const replaced = i.replace("2.", "");
+		return replaced.trim();
+	});
+	return e;
 };
 
 module.exports.outputTransformer = outputTransformer;

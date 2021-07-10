@@ -12,12 +12,12 @@ const formSchema = new mongoose.Schema(
 					required: true,
 					trim: true,
 				},
-				response: {
+				responseType: {
 					type: String,
 					required: true,
 					trim: true,
 				},
-				rating: {
+				maxRating: {
 					type: Number,
 					required: true,
 				},
@@ -30,24 +30,23 @@ const formSchema = new mongoose.Schema(
 				trim: true,
 			},
 		],
-        owner: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'User',
-          },
+		owner: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: "User",
+		},
 	},
-    
+
 	{
 		timestamps: true,
 	}
 );
 
-userSchema.virtual('userResponses', {
-	ref: 'Response',
-	localField: '_id',
-	foreignField: 'formId',
-  });
-  
+formSchema.virtual("userResponses", {
+	ref: "Response",
+	localField: "_id",
+	foreignField: "formId",
+});
 
 const Form = mongoose.model("Form", formSchema);
 module.exports = Form;

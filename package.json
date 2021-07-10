@@ -12,6 +12,7 @@
   "author": "Lukas Steiner",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.4.5",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "chalk": "^4.1.1",

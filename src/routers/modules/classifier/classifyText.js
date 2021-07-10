@@ -1,6 +1,6 @@
-const OpenAI = require("./modules/openai");
+const OpenAI = require("../openai");
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
-const outputTransformer = require("../output-transformer/outputTransformer")
+const {outputTransformer} = require("../output-transformer/outputTransformer")
 
 
 const classifyText = async (review, id) => {
@@ -12,7 +12,7 @@ const classifyText = async (review, id) => {
         const gptCommand =
 			"Extract the core messages from the review and classify them into short tags.";
 		const gptConfig = {
-			engine: "davinci-instruct-beta",
+			engine: "curie-instruct-beta",
 			prompt: `${gptCommand}\n\nReview:\n${review}\n\nTags:\n1.`,
 			maxTokens: 40,
 			temperature: 0.8,

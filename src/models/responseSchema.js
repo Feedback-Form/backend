@@ -5,17 +5,17 @@ const responseSchema = new mongoose.Schema(
 		personalDetails: {
 			firstName: {
 				type: String,
-				required: true,
+				required: false,
 				trim: true,
 			},
 			lastName: {
 				type: String,
-				required: true,
+				required: false,
 				trim: true,
 			},
 			linkedInProfile: {
 				type: String,
-				required: true,
+				required: false,
 				trim: true,
 			},
 		},

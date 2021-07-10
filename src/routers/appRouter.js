@@ -6,10 +6,9 @@ const auth = require("../middlewares/auth");
 //schemes
 const Form = require("../models/formSchema");
 const Response = require("../models/responseSchema");
-const Tag = require("../models/tagSchema");
 
 //modules
-const classifyText = require("./modules/classifier/classifyText");
+const { classifyText } = require("./modules/classifier/classifyText");
 
 /*
  *
@@ -81,22 +80,6 @@ appRouter.get("/v1/forms", auth, async (req, res) => {
 
 /*
  *
- *TAG
- *
- */
-
-appRouter.get("/v1/tags", auth, async (req, res) => {
-	try {
-		const tags = await Tag.find({ owner: req.user._id });
-
-		res.status(201).send({ payload: { tags } });
-	} catch (err) {
-		res.status(400).send({ payload: { message: err.message } });
-	}
-});
-
-/*
- *
  *Response
  *
  */
@@ -105,14 +88,19 @@ appRouter.post("/v1/response/:formId", async (req, res) => {
 	try {
 		const { personalDetails, questionResponses } = req.body;
 
+		const taggedQuestions = [];
+		for (const item of questionResponses) {
+			const tags = await classifyText(item.response, req.params.formId);
+			const taggedResponse = {
+				...item,
+				tags,
+			};
+			taggedQuestions.push(taggedResponse);
+		}
 		const response = new Response({
-			...req.body,
+			questionResponses: taggedQuestions,
 			personalDetails,
 			formId: req.params.formId,
-		});
-		questionResponses.forEach((question) => {
-			const tags = await classifyText(question, "xy-xy3-jfs");
-			console.log(tags);
 		});
 		const savedResponse = await response.save();
 		res.status(201).send({ payload: { savedResponse } });
