@@ -33,10 +33,10 @@ appRouter.post("/v1/form", auth, async (req, res) => {
 	}
 });
 
-appRouter.delete("/v1/form/:id", auth, async (req, res) => {
+appRouter.delete("/v1/form/:formId", auth, async (req, res) => {
 	try {
 		const form = await Form.findOneAndDelete({
-			_id: req.params.id,
+			_id: req.params.formId,
 			owner: req.user._id,
 		});
 
@@ -51,17 +51,17 @@ appRouter.delete("/v1/form/:id", auth, async (req, res) => {
 	}
 });
 
-appRouter.get("/v1/form/:id", async (req, res) => {
+appRouter.get("/v1/form/:formId", async (req, res) => {
 	try {
 		const form = await Form.findOne({
-			_id: req.params.id,
+			_id: req.params.formId,
 		});
 
 		if (!form) {
 			throw new Error("no document found.");
 		}
 		res.status(201).send({
-			payload: { message: `You've successfully deleted the form.`, form },
+			payload: { form },
 		});
 	} catch (err) {
 		res.status(400).send({ payload: { message: err.message } });
@@ -110,18 +110,9 @@ appRouter.post("/v1/response/:formId", async (req, res) => {
 });
 appRouter.get("/v1/response/:id", auth, async (req, res) => {
 	try {
-		const response = await Response.findOne({ owner: req.params.id });
+		const response = await Response.findOne({ _id: req.params.id });
 
 		res.status(201).send({ payload: { response } });
-	} catch (err) {
-		res.status(400).send({ payload: { message: err.message } });
-	}
-});
-appRouter.get("/v1/responses/:formId", auth, async (req, res) => {
-	try {
-		const responses = await Response.find({ owner: req.params.formId });
-
-		res.status(201).send({ payload: { responses } });
 	} catch (err) {
 		res.status(400).send({ payload: { message: err.message } });
 	}

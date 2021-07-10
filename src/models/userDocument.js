@@ -169,7 +169,6 @@ userSchema.pre("save", async function (next) {
 userSchema.pre("remove", async function (next) {
 	const user = this;
 
-	// await aiDocument.deleteMany({ author: user._id });
 	await Form.deleteMany({ owner: user._id });
 	await Response.deleteMany({ formId: user._id });
 

@@ -1,4 +1,4 @@
-const { Router } = require("express");
+
 const express = require("express");
 
 const userRouter = new express.Router();
