@@ -6,7 +6,7 @@ const {outputTransformer} = require("../output-transformer/outputTransformer")
 const classifyText = async (review, id) => {
     try {
         if (typeof review !== 'string' || typeof id !== 'string') {
-            throw new Error(`"text must be a string."`)
+            throw new Error(`The text must be a string.`)
         }
 
         const gptCommand =

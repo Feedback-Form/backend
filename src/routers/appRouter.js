@@ -6,9 +6,13 @@ const auth = require("../middlewares/auth");
 //schemes
 const Form = require("../models/formSchema");
 const Response = require("../models/responseSchema");
+const User = require("../models/userDocument");
 
 //modules
 const { classifyText } = require("./modules/classifier/classifyText");
+const {
+	suggestResponse,
+} = require("./modules/suggestResponse/suggestResponse");
 
 /*
  *
@@ -113,6 +117,26 @@ appRouter.get("/v1/response/:id", auth, async (req, res) => {
 		const response = await Response.findOne({ _id: req.params.id });
 
 		res.status(201).send({ payload: { response } });
+	} catch (err) {
+		res.status(400).send({ payload: { message: err.message } });
+	}
+});
+
+appRouter.get("/v1/response/suggestion/:formId", async (req, res) => {
+	try {
+		const { question, rating, maxRating } = req.body;
+		// get the company Description of the owner's form
+		const form = await Form.findOne({ _id: req.params.formId });
+		const user = await User.findOne({ _id: form.owner });
+		const { productServiceDescription, _id } = user;
+		const suggestedResponse = await suggestResponse(
+			question,
+			rating,
+			maxRating,
+			productServiceDescription,
+			_id.toString()
+		);
+		res.status(201).send({ payload: { suggestedResponse } });
 	} catch (err) {
 		res.status(400).send({ payload: { message: err.message } });
 	}

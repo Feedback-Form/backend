@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema(
 				}
 			},
 		},
-		companyDescription: {
+		  productServiceDescription: {
 			type: String,
 			require: true,
 			trim: true,
