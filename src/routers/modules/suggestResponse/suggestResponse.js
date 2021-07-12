@@ -27,7 +27,7 @@ const suggestResponse = async (
 			engine: "davinci-instruct-beta",
 			prompt: `${gptCommand}\n\nservice/product description:\n${productServiceDescription}\n\nquestion to the customer:\n${question}\n\ncustomer's rating:\n${rating}/${maxRating}\n\nthe customer's feedback:\n`,
 			maxTokens: 100,
-			temperature: 0.7,
+			temperature: 1,
 			topP: 1,
 			presencePenalty: 0,
 			frequencyPenalty: 1,

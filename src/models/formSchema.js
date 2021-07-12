@@ -2,8 +2,18 @@ const mongoose = require("mongoose");
 
 const formSchema = new mongoose.Schema(
 	{
+		formName: {
+			type: String,
+			required: true,
+			trim: true,
+		},
 		aiSuggestions: {
 			type: Boolean,
+			required: true,
+		},
+		allowPersonalDetails: {
+			type: Boolean,
+			required: true,
 		},
 		questions: [
 			{
