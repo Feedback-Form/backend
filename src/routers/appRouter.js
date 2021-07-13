@@ -90,7 +90,8 @@ appRouter.get("/v1/forms", auth, async (req, res) => {
 
 appRouter.post("/v1/response/:formId", async (req, res) => {
 	try {
-		const { personalDetails, questionResponses } = req.body;
+		const { personalDetails, questionResponses, allowPublishing } =
+			req.body;
 
 		const taggedQuestions = [];
 		for (const item of questionResponses) {
@@ -102,6 +103,7 @@ appRouter.post("/v1/response/:formId", async (req, res) => {
 			taggedQuestions.push(taggedResponse);
 		}
 		const response = new Response({
+			allowPublishing,
 			questionResponses: taggedQuestions,
 			personalDetails,
 			formId: req.params.formId,

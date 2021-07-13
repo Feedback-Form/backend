@@ -19,6 +19,10 @@ const responseSchema = new mongoose.Schema(
 				trim: true,
 			},
 		},
+		allowPublishing: {
+			type: Boolean,
+			required: true,
+		},
 		questionResponses: [
 			{
 				question: {
