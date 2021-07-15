@@ -124,6 +124,17 @@ appRouter.get("/v1/response/:id", auth, async (req, res) => {
 	}
 });
 
+appRouter.get("/v1/responses/:formId", auth, async (req, res) => {
+	try {
+		const responses = await Response.find({ formId: req.params.formId });
+
+		res.status(201).send({ payload: { responses } });
+	} catch (err) {
+		res.status(400).send({ payload: { message: err.message } });
+	}
+});
+
+
 appRouter.post("/v1/response/suggestion/:formId", async (req, res) => {
 	try {
 		const { question, rating, maxRating } = req.body;
