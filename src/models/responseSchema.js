@@ -39,6 +39,11 @@ const responseSchema = new mongoose.Schema(
 					type: Number,
 					required: true,
 				},
+				questionId: {
+					type: String,
+					required: true,
+					trim: true,
+				},
 				tags: [
 					{
 						type: String,

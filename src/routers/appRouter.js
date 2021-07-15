@@ -124,7 +124,7 @@ appRouter.get("/v1/response/:id", auth, async (req, res) => {
 	}
 });
 
-appRouter.get("/v1/response/suggestion/:formId", async (req, res) => {
+appRouter.post("/v1/response/suggestion/:formId", async (req, res) => {
 	try {
 		const { question, rating, maxRating } = req.body;
 		// get the company Description of the owner's form
