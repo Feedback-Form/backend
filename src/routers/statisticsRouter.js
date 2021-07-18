@@ -9,11 +9,11 @@ const Response = require("../models/responseSchema");
 const User = require("../models/userDocument");
 
 statisticsRouter.get(
-	"/v1/statistics/reviews/:formId/:interval",
+	"/v1/statistics/responses/:formId",
 	auth,
 	async (req, res) => {
 		try {
-			const { interval, formId } = req.params;
+			const { formId } = req.params;
 			//let { start, end } = req.query;
 			const start = new Date(2021, 6, 18);
 			const end = new Date(2021, 7, 19);
@@ -117,7 +117,7 @@ statisticsRouter.get(
 						dayNumber: "$_id",
 						date: "$first",
 						_id: false,
-						averageRatingDaily: "$averageRating",
+						averageRatingDaily: "$averageRatingDaily",
 					},
 				},
 			]);
@@ -158,18 +158,18 @@ statisticsRouter.get(
 			res.status(201).send({
 				payload: {
 					filterParameters: {
-						interval,
 						start,
 						end,
 						formId,
 					},
 					reviewsCount: {
-						averageResponseRatingDaily: averageRatingDailyQuery,
-						averageRatingWeekly: averageRatingWeeklyQuery,
-						responseCountDaily: responseCountDailyQuery,
-						responseCountWeekly: responseCountWeeklyQuery,
+						ratingCountDaily: responseCountDailyQuery,
+						ratingCountWeekly: responseCountWeeklyQuery,
 					},
-					averageRating: {},
+					averageRating: {
+						averageRatingDaily: averageRatingDailyQuery,
+						averageRatingWeekly: averageRatingWeeklyQuery,
+					},
 				},
 			});
 		} catch (err) {
