@@ -6,6 +6,7 @@ require("./db/mongoose");
 // routers
 const appRouter = require("./routers/appRouter");
 const userRouter = require("./routers/userRouter");
+const statisticsRouter = require("./routers/statisticsRouter");
 
 const app = express();
 app.use(helmet());
@@ -25,5 +26,6 @@ app.use(
 app.use(express.json());
 app.use(appRouter);
 app.use(userRouter);
+app.use(statisticsRouter);
 
 module.exports = app;

@@ -1,6 +1,5 @@
 const express = require("express");
 const appRouter = new express.Router();
-const chalk = require("chalk");
 const auth = require("../middlewares/auth");
 
 //schemes
