@@ -39,6 +39,10 @@ const responseSchema = new mongoose.Schema(
 					type: Number,
 					required: true,
 				},
+				maxRating: {
+					type: Number,
+					required: true,
+				},
 				questionId: {
 					type: String,
 					required: true,

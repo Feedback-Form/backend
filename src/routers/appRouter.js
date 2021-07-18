@@ -74,9 +74,9 @@ appRouter.get("/v1/form/:formId", async (req, res) => {
 
 appRouter.get("/v1/forms", auth, async (req, res) => {
 	try {
-		const documents = await Form.find({ owner: req.user._id });
+		const forms = await Form.find({ owner: req.user._id });
 
-		res.status(201).send({ payload: { documents } });
+		res.status(201).send({ payload: { forms } });
 	} catch (err) {
 		res.status(400).send({ payload: { message: err.message } });
 	}
@@ -133,7 +133,6 @@ appRouter.get("/v1/responses/:formId", auth, async (req, res) => {
 		res.status(400).send({ payload: { message: err.message } });
 	}
 });
-
 
 appRouter.post("/v1/response/suggestion/:formId", async (req, res) => {
 	try {
