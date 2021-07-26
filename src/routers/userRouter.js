@@ -1,4 +1,3 @@
-
 const express = require("express");
 
 const userRouter = new express.Router();
@@ -133,7 +132,7 @@ userRouter.post(
 userRouter.get("/v1/user/info", auth, async (req, res) => {
 	try {
 		const user = await User.findById(req.user._id);
-		res.status(201).send({ user });
+		res.status(201).send({ payload: { user } });
 	} catch (err) {
 		res.status(400).send(err);
 	}

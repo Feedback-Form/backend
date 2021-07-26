@@ -123,7 +123,7 @@ appRouter.get("/v1/response/:id", auth, async (req, res) => {
 	}
 });
 
-appRouter.get("/v1/responses/:formId", auth, async (req, res) => {
+appRouter.get("/v1/responses/:formId", async (req, res) => {
 	try {
 		const responses = await Response.find({ formId: req.params.formId });
 
