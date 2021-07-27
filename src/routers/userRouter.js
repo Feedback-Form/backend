@@ -179,7 +179,9 @@ userRouter.patch("/v1/user/edit", auth, async (req, res) => {
 
 		await user.save();
 
-		res.status(201).send({ success: { message: user } });
+		res.status(201).send({
+			payload: { user, message: "successfully edited user details." },
+		});
 	} catch (err) {
 		res.status(400).send({ payload: { message: err.message } });
 	}
@@ -189,7 +191,9 @@ userRouter.patch("/v1/user/edit", auth, async (req, res) => {
 userRouter.delete("/v1/user/delete", auth, async (req, res) => {
 	try {
 		await req.user.remove();
-		res.status(201).send(req.user);
+		res.status(201).send({
+			payload: { user, message: "successfully deleted the user." },
+		});
 	} catch (err) {
 		res.status(400).send({ payload: { message: err.message } });
 	}
